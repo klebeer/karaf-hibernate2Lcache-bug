@@ -1,8 +1,8 @@
 **Error with Second Level Cache with karaf/hibernate/Jcache/ehcache**
 
-This project reproduce an error (or a misconfiguration ) trying to use second level cache withÑ
+This project reproduce an error (or a misconfiguration ) trying to use second level cache with:
  * Hibernate 5.4.2
- * Karaf 4.25 
+ * Karaf 4.2.5 
  * Ehcache 3
  * Jcache
  
