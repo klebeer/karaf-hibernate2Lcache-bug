@@ -66,7 +66,7 @@ service; [javax.cache.spi.CachingProvider] with properties:
  
 *Steps to reproduce:* 
  
-Using Apache Maven, use:
+Using Apache Maven:
  ```
   mvn clean install
  ```
