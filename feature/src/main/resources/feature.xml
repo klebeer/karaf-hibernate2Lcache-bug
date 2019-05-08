@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<features name="hiernate-2lcache-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
+
+    <feature name="hiernate-2lcache-datasource" version="${project.version}">
+        <config name="org.ops4j.datasource-user">
+            osgi.jdbc.driver.class=org.h2.Driver
+            databaseName=user;create=true
+            dataSourceName=user
+        </config>
+        <capability>
+            osgi.service;objectClass=javax.sql.DataSource;effective:=active;osgi.jndi.service.name=user
+        </capability>
+    </feature>
+
+    <feature name="hiernate-2lcache-jpa" version="${project.version}">
+        <feature>hiernate-2lcache-datasource</feature>
+        <feature>scr</feature>
+        <feature>transaction</feature>
+        <feature>jndi</feature>
+        <feature>pax-jdbc-config</feature>
+        <feature>pax-jdbc-h2</feature>
+        <feature>pax-jdbc-pool-dbcp2</feature>
+        <feature>jdbc</feature>
+        <feature dependency="true">aries-blueprint</feature>
+        <feature version="[2,3)">jpa</feature>
+        <feature version="[5,6)">hibernate</feature>
+
+
+        <bundle>mvn:javax.xml.bind/jaxb-api/2.3.0</bundle>
+        <bundle>mvn:com.sun.xml.bind/jaxb-core/2.3.0</bundle>
+        <bundle>mvn:com.sun.xml.bind/jaxb-impl/2.3.0</bundle>
+
+        <bundle>mvn:org.ehcache/ehcache/${ehcache-version}</bundle>
+        <bundle>mvn:javax.cache/cache-api/${cache-api.version}</bundle>
+        <bundle>mvn:org.hibernate/hibernate-jcache/${hibernate-version}</bundle>
+    </feature>
+
+
+
+    <feature name="hiernate-2lcache" version="${project.version}">
+        <feature>scr</feature>
+        <feature version="${project.version}">hiernate-2lcache-jpa</feature>
+        <bundle>mvn:org.ecuadorjug.karaf/app/${project.version}</bundle>
+        <bundle>mvn:org.ecuadorjug.karaf/command/${project.version}</bundle>
+    </feature>
+
+
+
+
+</features>
